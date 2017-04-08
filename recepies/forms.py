@@ -10,12 +10,14 @@ User = get_user_model()
 from .models import Recipe
 
 class PostForm(forms.ModelForm):
-     class Meta:
+    class Meta:
          model = Recipe
          fields = [
             "title",
             "recipe",
          ]
+    def clean(self, *args, **kwargs):
+        return super(PostForm,self).clean(*args, **kwargs)
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()

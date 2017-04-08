@@ -9,10 +9,22 @@ from .forms import PostForm
 
 @login_required(login_url='/login/')
 def recipe_create(request):
+    u = request.user
     form = PostForm(request.POST or None)
     if form.is_valid():
-        instance = form.save(commit=False)
+        title = form.cleaned_data.get('title')
+        recipe = form.cleaned_data.get('recipe')
+        author = {
+            'id': u.id,
+            'name': u.username
+        }
+        instance = Recipe.objects.create(
+            title=title,
+            recipe=recipe,
+            author=author
+        )
         instance.save()
+        return redirect('/')
     context = {
         "form": form
     }
