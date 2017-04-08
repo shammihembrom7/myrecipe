@@ -3,6 +3,7 @@
 <html>
 
 <body>
+  <h3>{{user}}</h3>
   {% for obj in objList %}
   <a href="/detail/{{obj.id}}">{{ obj.title }}</a><br>
   {% endfor %}
