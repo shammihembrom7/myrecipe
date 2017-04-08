@@ -7,15 +7,17 @@ from django.contrib.auth import (
 )
 
 User = get_user_model()
-from .models import Recipe
+from .models import Recipe, Review
 
 class PostForm(forms.ModelForm):
-     class Meta:
+    class Meta:
          model = Recipe
          fields = [
             "title",
             "recipe",
          ]
+    def clean(self, *args, **kwargs):
+        return super(PostForm,self).clean(*args, **kwargs)
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()
@@ -45,3 +47,13 @@ class UserRegForm(forms.ModelForm):
         ]
     def clean(self, *args, **kwargs):
         return super(UserRegForm,self).clean(*args, **kwargs)
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = [
+            'review'
+        ]
+
+    def clean(self, *args, **kwargs):
+        return super(ReviewForm,self).clean(*args, **kwargs)

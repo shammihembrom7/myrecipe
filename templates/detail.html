@@ -1,16 +1,18 @@
-<!--DOCTYPE html-->
+{% extends "base.html" %}
 
-<html>
-
-<body>
+{% block content %}
   <h1>{{ obj.title }}</h1>
     <p>{{obj.recipe}}</p>
     <P>author: {{obj.author.name}}</p>
-  <h5>Object id is : {{obj.id}}<h5>
     <h4>reviews</h4>
-    {% for i in obj.reviews %}
-      {{i.review}}<br>
-    {% endfor %}
-</body>
 
-</html>
+    <form  method="POST" action="">{% csrf_token %}
+      {{form.as_p}}
+      <input class='btn btn-default' type="submit">
+    </form>
+
+    {% for i in obj.reviews %}
+      {{i.user.name}} : {{i.review}}<br>
+    {% endfor %}
+
+{% endblock content %}
