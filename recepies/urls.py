@@ -10,4 +10,7 @@ urlpatterns = [
     url(r'^detail/(?P<id>[\w\-]+)/$', "recepies.views.recipe_detail"),
     url(r'^update/$', "recepies.views.recipe_update"),
     url(r'^delete/$', "recepies.views.recipe_delete"),
+    url(r'^login/$', "recepies.views.login_view"),
+    url(r'^logout/$', "recepies.views.logout_view"),
+    url(r'^register/$', "recepies.views.register_view"),
 ]
