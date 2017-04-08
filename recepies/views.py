@@ -4,8 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from .models import Recipe
-from .forms import PostForm
+from .models import Recipe, Review
+from .forms import PostForm, ReviewForm
 
 @login_required(login_url='/login/')
 def recipe_create(request):
@@ -32,7 +32,22 @@ def recipe_create(request):
 
 def recipe_detail(request, id=None):
     instance = get_object_or_404(Recipe, id=id)
+    u = request.user
+    form = ReviewForm(request.POST or None)
+    if form.is_valid():
+        review = form.cleaned_data.get('review')
+        user = { 'user_id' : u.id, 'name': u.username}
+        inst = Review.objects.create(
+            review = review,
+            user = user
+        )
+        inst.save()
+        instance.reviews.append(Review(review = review, user = user))
+        instance.save()
+
+
     content = {
+        'form': form,
         "obj" : instance
     }
     return render(request, "detail.html", content)
@@ -49,7 +64,7 @@ def recipe_list(request):
         "user": u
     }
 
-    return render(request, "index.html", content)
+    return render(request, "base.html", content)
     #return HttpResponse("<h1>list</h1>")
 
 def recipe_update(request):
