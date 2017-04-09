@@ -6,9 +6,16 @@
 <body>
   <nav class="navbar navbar-default">
     <a class="navbar-brand" href="#">MyRecipe</a>
+
+
     <form action="/logout">
-      <input type="submit" class="btn btn-default navbar-btn" value="logout" style="margin-left: 1000px" />
+      <label style="float: right; margin-right:50px; margin-top:20px;">{{user.username}}</label>
+      <input type="submit" class="btn btn-default navbar-btn" value="logout" style=" display:block; float: right;" />
     </form>
+    <form action="/register">
+      <input type="submit" class="btn btn-default navbar-btn" value="register" style=" display:block" />
+    </form>
+
   </nav>
 
   <div class="container">
@@ -19,6 +26,9 @@
     {% block content %}
 
     <h3>RECIPES</h3>
+    <form action="/create">
+      <input type="submit" class="btn btn-default navbar-btn" value="Post Recipe" style=" display:block; float: right;" />
+    </form>
     {% for obj in objList %}
     <a href="/detail/{{obj.id}}">{{ obj.title }}</a><br>
     {% endfor %}
