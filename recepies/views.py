@@ -55,7 +55,7 @@ def recipe_detail(request, id=None):
 @login_required(login_url='/login/')
 def recipe_list(request):
     if request.user.is_authenticated():
-        u = request.user.username
+        u = request.user
     else:
         u = "login please!"
     queryset = Recipe.objects.all()
