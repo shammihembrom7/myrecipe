@@ -3,7 +3,7 @@ A demo web app to share reipes. Built using django.
 
 ### Implementaions:
 - Multiple database using database router
-- Using different databases for authentication and storing data respectively.
+- Using different databases sqlite3 and MongoDB for authentication and storing data respectively.
 
 To setup, run commands:
 
